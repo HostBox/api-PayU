@@ -16,7 +16,6 @@ class Connection {
         REQUEST_CONFIRM_PAYMENT = 'Payment/confirm',
         REQUEST_CANCEL_PAYMENT = 'Payment/cancel';
 
-
     /** @var Config */
     protected $config;
 
@@ -41,7 +40,7 @@ class Connection {
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getParameters($this->config->getPosId(), $this->config->getKey1()));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getParameters($this->config));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
         curl_close($ch);
@@ -81,9 +80,9 @@ class Connection {
     /** @return string */
     private function checkAndGetEncoding() {
         switch ($this->config->getEncoding()) {
-            case Config::ENCODING_ISO_8859_2:
-            case Config::ENCODING_UTF_8:
-            case Config::ENCODING_WINDOWS_1250:
+            case IConfig::ENCODING_ISO_8859_2:
+            case IConfig::ENCODING_UTF_8:
+            case IConfig::ENCODING_WINDOWS_1250:
                 return $this->config->getEncoding();
             default:
                 throw new LogicException('Not supported character encoding');
@@ -93,8 +92,8 @@ class Connection {
     /** @return string */
     private function checkAndGetResponseFormat() {
         switch ($this->config->getFormat()) {
-            case Config::FORMAT_TXT:
-            case Config::FORMAT_XML:
+            case IConfig::FORMAT_TXT:
+            case IConfig::FORMAT_XML:
                 return $this->config->getFormat();
             default:
                 throw new LogicException('Not supported response format');

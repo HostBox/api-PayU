@@ -2,6 +2,8 @@
 
 namespace HostBoxTests\Api\PayU;
 
+use HostBox\Api\PayU\Config;
+use HostBox\Api\PayU\IConfig;
 use HostBox\Api\PayU\Requests\NewPaymentRequest;
 use HostBox\Api\PayU\Requests\PaymentCancelRequest;
 use HostBox\Api\PayU\Requests\PaymentConfirmRequest;
@@ -16,8 +18,13 @@ class RequestTest extends Tester\TestCase {
     /** @var NewPaymentRequest */
     private $newPaymentRequest;
 
+    /** @var IConfig */
+    private $config;
+
 
     protected function setUp() {
+        $this->config = new Config('1234', 'abcdefg', 'key1', 'key2');
+
         $this->newPaymentRequest = new NewPaymentRequest();
         $this->newPaymentRequest->setPosAuthKey('abcdefg');
         $this->newPaymentRequest->setSessionId(123);
@@ -69,19 +76,20 @@ class RequestTest extends Tester\TestCase {
     public function testGetParameters() {
         Tester\Assert::same(
             'pos_auth_key=abcdefg&amount=10000&desc=TEST&first_name=Name&last_name=Surname&email=test@test.test&language=cs&client_ip=127.0.0.1&pos_id=1234&session_id=123&ts=123456789&sig=eabc4e2e2825c51743b3ed673db6fb99',
-            $this->newPaymentRequest->getParameters(1234, 'key1')
+            $this->newPaymentRequest->getParameters($this->config)
         );
 
         $this->newPaymentRequest->setAmount(9999);
         $this->newPaymentRequest->setDesc2('lorem');
         Tester\Assert::same(
             'pos_auth_key=abcdefg&amount=9999&desc=TEST&desc2=lorem&first_name=Name&last_name=Surname&email=test@test.test&language=cs&client_ip=127.0.0.1&pos_id=1234&session_id=123&ts=123456789&sig=9d72e0f7010db0f911131d2a86eb48e0',
-            $this->newPaymentRequest->getParameters(1234, 'key1')
+            $this->newPaymentRequest->getParameters($this->config)
         );
 
-        Tester\Assert::exception(function () {
+        $config = $this->config;
+        Tester\Assert::exception(function () use ($config) {
             $request = new NewPaymentRequest();
-            $request->getParameters(1234, 'key1');
+            $request->getParameters($config);
         }, '\HostBox\Api\PayU\Exceptions\LogicException');
     }
 

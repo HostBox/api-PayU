@@ -3,16 +3,7 @@
 namespace HostBox\Api\PayU;
 
 
-class Config {
-
-    const
-        ENCODING_ISO_8859_2 = 'ISO',
-        ENCODING_UTF_8 = 'UTF',
-        ENCODING_WINDOWS_1250 = 'WIN';
-
-    const
-        FORMAT_XML = 'xml',
-        FORMAT_TXT = 'txt';
+class Config implements IConfig {
 
     /** @var int */
     private $posId;
@@ -50,32 +41,32 @@ class Config {
         $this->format = $format;
     }
 
-    /** @return int */
+    /** @inheritdoc */
     public function getPosId() {
         return $this->posId;
     }
 
-    /** @return string */
+    /** @inheritdoc */
     public function getPosAuthKey() {
         return $this->posAuthKey;
     }
 
-    /** @return string */
+    /** @inheritdoc */
     public function getKey1() {
         return $this->key1;
     }
 
-    /** @return string */
+    /** @inheritdoc */
     public function getKey2() {
         return $this->key2;
     }
 
-    /** @return string */
+    /** @inheritdoc */
     public function getEncoding() {
         return $this->encoding;
     }
 
-    /** @return string */
+    /** @inheritdoc */
     public function getFormat() {
         return $this->format;
     }

@@ -2,15 +2,16 @@
 
 namespace HostBox\Api\PayU\Requests;
 
+use HostBox\Api\PayU\IConfig;
+
 
 interface IRequest {
 
     /**
-     * @param int $postId
-     * @param string $key
+     * @param IConfig $config
      * @return string
      */
-    public function getParameters($postId, $key);
+    public function getParameters(IConfig $config);
 
     /** @return string */
     public function getType();

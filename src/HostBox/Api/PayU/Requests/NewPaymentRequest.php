@@ -12,9 +12,6 @@ use HostBox\Api\PayU\Connection;
  * @method string getPosAuthKey
  * @method void setPosAuthKey($posAuthKey)
  *
- * @method string getSessionId
- * @method void setSessionId($sessionId)
- *
  * @method number getAmount
  * @method void setAmount($amount)
  *

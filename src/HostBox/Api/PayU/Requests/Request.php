@@ -3,6 +3,7 @@
 namespace HostBox\Api\PayU\Requests;
 
 use HostBox\Api\PayU\Exceptions\LogicException;
+use HostBox\Api\PayU\IConfig;
 use HostBox\Api\PayU\Strings;
 use Nette\Reflection\ClassType;
 use Nette\Utils\ArrayHash;
@@ -55,8 +56,11 @@ abstract class Request implements IRequest {
     }
 
     /** @inheritdoc */
-    public function getParameters($postId, $key) {
-        $this->setPosId($postId);
+    public function getParameters(IConfig $config) {
+        $this->setPosId($config->getPosId());
+
+        if ($this instanceof NewPaymentRequest)
+            $this->setPosAuthKey($config->getPosAuthKey());
 
         $reflection = new ClassType($this);
         $parameters = array();
@@ -81,7 +85,7 @@ abstract class Request implements IRequest {
         if (count($errors) > 0) {
             throw new LogicException('empty properties with required: ' . implode(', ', $errors));
         }
-        $parameters[] = 'sig=' . $this->getSig($key);
+        $parameters[] = 'sig=' . $this->getSig($config->getKey1());
 
         return implode('&', $parameters);
     }
