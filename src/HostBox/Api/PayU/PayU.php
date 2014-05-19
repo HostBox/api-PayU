@@ -27,6 +27,14 @@ class PayU {
      * @param IRequest $request
      * @return string
      */
+    public function getRequestUrl(IRequest $request) {
+        return $this->connection->getUrl($request);
+    }
+
+    /**
+     * @param IRequest $request
+     * @return string
+     */
     public function rawRequest(IRequest $request) {
         return $this->connection->request($request);
     }
