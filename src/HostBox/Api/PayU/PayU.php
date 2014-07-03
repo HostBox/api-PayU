@@ -9,6 +9,7 @@ use HostBox\Api\PayU\Requests\IRequest;
 use HostBox\Api\PayU\Requests\PaymentCancelRequest;
 use HostBox\Api\PayU\Requests\PaymentConfirmRequest;
 use HostBox\Api\PayU\Requests\PaymentInfoRequest;
+use HostBox\Api\PayU\Responses\IResponse;
 use HostBox\Api\PayU\Responses\PaymentActionResponse;
 use HostBox\Api\PayU\Responses\PaymentInfoResponse;
 
@@ -21,6 +22,11 @@ class PayU {
 
     public function __construct(Connection $connection) {
         $this->connection = $connection;
+    }
+
+    /** @return Config */
+    public function getConfig() {
+        return $this->connection->getConfig();
     }
 
     /**
@@ -61,6 +67,14 @@ class PayU {
      */
     public function confirmPayment(PaymentConfirmRequest $request) {
         return $this->createResponseEntity($request);
+    }
+
+    /**
+     * @param IResponse $response
+     * @return bool
+     */
+    public function isResponseValid(IResponse $response) {
+        return $response->isSigValid($this->getConfig()->getKey2());
     }
 
     /**
