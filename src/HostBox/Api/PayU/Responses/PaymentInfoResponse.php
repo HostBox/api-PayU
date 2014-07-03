@@ -7,6 +7,17 @@ use DateTime;
 
 class PaymentInfoResponse extends Response {
 
+    const
+        STATUS_NEW = 1,
+        STATUS_CANCELLED = 2,
+        STATUS_REJECTED = 3,
+        STATUS_STARTED = 4,
+        STATUS_AWAITING_COLLECTION = 5,
+        STATUS_REJECT_DONE = 7,
+        STATUS_ENDED = 99,
+        STATUS_UNKNOWN = 888;
+
+
     /** @var int */
     protected $id;
 
