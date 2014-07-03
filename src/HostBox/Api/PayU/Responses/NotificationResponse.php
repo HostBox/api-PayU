@@ -3,16 +3,7 @@
 namespace HostBox\Api\PayU\Responses;
 
 
-class PaymentActionResponse extends Response {
-
-    /** @var int */
-    protected $id;
-
-
-    /** @return int */
-    public function getId() {
-        return $this->id;
-    }
+class NotificationResponse extends Response {
 
     /** @inheritdoc */
     public function isSigValid($key2) {

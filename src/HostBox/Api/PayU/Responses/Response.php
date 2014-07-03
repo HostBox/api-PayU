@@ -7,7 +7,20 @@ use HostBox\Api\PayU\Strings;
 use Nette\Reflection\ClassType;
 
 
-abstract class Response {
+abstract class Response implements IResponse {
+
+    /** @var string */
+    protected $posId;
+
+    /** @var string */
+    protected $sessionId;
+
+    /** @var string */
+    protected $ts;
+
+    /** @var string */
+    protected $sig;
+
 
     public function __construct(array $data) {
         $this->assign($data);
@@ -33,6 +46,26 @@ abstract class Response {
             }
         }
 
+    }
+
+    /** @inheritdoc */
+    public function getPosId() {
+        return $this->posId;
+    }
+
+    /** @inheritdoc */
+    public function getSig() {
+        return $this->sig;
+    }
+
+    /** @inheritdoc */
+    public function getTs() {
+        return $this->ts;
+    }
+
+    /** @inheritdoc */
+    public function getSessionId() {
+        return $this->sessionId;
     }
 
 }

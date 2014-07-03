@@ -11,12 +11,6 @@ class PaymentInfoResponse extends Response {
     protected $id;
 
     /** @var string */
-    protected $posId;
-
-    /** @var string */
-    protected $sessionId;
-
-    /** @var string */
     protected $orderId;
 
     /** @var number */
@@ -54,12 +48,6 @@ class PaymentInfoResponse extends Response {
 
     /** @var string */
     protected $authFraud;
-
-    /** @var string */
-    protected $ts;
-
-    /** @var string */
-    protected $sig;
 
 
     /** @return number */
@@ -117,11 +105,6 @@ class PaymentInfoResponse extends Response {
         return $this->payType;
     }
 
-    /** @return string */
-    public function getPosId() {
-        return $this->posId;
-    }
-
     /** @return DateTime */
     public function getRecv() {
         return $this->recv;
@@ -133,23 +116,15 @@ class PaymentInfoResponse extends Response {
     }
 
     /** @return string */
-    public function getSessionId() {
-        return $this->sessionId;
-    }
-
-    /** @return string */
-    public function getSig() {
-        return $this->sig;
-    }
-
-    /** @return string */
     public function getStatus() {
         return $this->status;
     }
 
-    /** @return string */
-    public function getTs() {
-        return $this->ts;
+    /** @inheritdoc */
+    public function isSigValid($key2) {
+        return ($this->getSig() == md5($this->getPosId() . $this->getSessionId() . $this->getOrderId() .
+                $this->getStatus() . $this->getAmount() . $this->getDesc() . $this->getTs() . $key2)
+        );
     }
 
 }
