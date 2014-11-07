@@ -11,7 +11,7 @@ interface IRequest {
      * @param IConfig $config
      * @return string
      */
-    public function getParameters(IConfig $config);
+    public function getConnectionParameters(IConfig $config);
 
     /** @return string */
     public function getType();

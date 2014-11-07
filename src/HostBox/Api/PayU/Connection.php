@@ -40,7 +40,7 @@ class Connection {
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getParameters($this->config));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request->getConnectionParameters($this->config));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
         curl_close($ch);
@@ -63,6 +63,7 @@ class Connection {
 
     /**
      * @param IRequest $request
+     * @throws LogicException
      * @return string
      */
     private function checkAndGetRequestType(IRequest $request) {
@@ -77,7 +78,10 @@ class Connection {
         }
     }
 
-    /** @return string */
+    /**
+     * @throws LogicException
+     * @return string
+     */
     private function checkAndGetEncoding() {
         switch ($this->config->getEncoding()) {
             case IConfig::ENCODING_ISO_8859_2:
@@ -89,7 +93,10 @@ class Connection {
         }
     }
 
-    /** @return string */
+    /**
+     * @throws LogicException
+     * @return string
+     */
     private function checkAndGetResponseFormat() {
         switch ($this->config->getFormat()) {
             case IConfig::FORMAT_TXT:

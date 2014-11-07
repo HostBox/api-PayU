@@ -34,6 +34,7 @@ abstract class Request implements IRequest {
     /**
      * @param $name
      * @param $arguments
+     * @throws LogicException
      * @return mixed|void
      */
     public function __call($name, $arguments) {
@@ -56,9 +57,22 @@ abstract class Request implements IRequest {
     }
 
     /** @inheritdoc */
-    public function getParameters(IConfig $config) {
-        $this->setPosId($config->getPosId());
+    public function getConnectionParameters(IConfig $config) {
+        $parameters = array();
+        foreach ($this->getDataToArray($config) as $name => $value) {
+            $parameters[] = $name . '=' . $value;
+        }
 
+        return implode('&', $parameters);
+    }
+
+    /**
+     * @param IConfig $config
+     * @throws LogicException
+     * @return array
+     */
+    public function getDataToArray(IConfig $config) {
+        $this->setPosId($config->getPosId());
         if ($this instanceof NewPaymentRequest)
             $this->setPosAuthKey($config->getPosAuthKey());
 
@@ -74,7 +88,7 @@ abstract class Request implements IRequest {
             $propertyGetter = $getterPrefix . ucfirst($property->getName());
             $value = $this->$propertyGetter();
             if ($value !== NULL) {
-                $parameters[] = Strings::camelToUnderdash($property->getName()) . '=' . $value;
+                $parameters[Strings::camelToUnderdash($property->getName())] = $value;
             }
 
             if ($property->hasAnnotation('required') && $value === NULL) {
@@ -83,11 +97,11 @@ abstract class Request implements IRequest {
         }
 
         if (count($errors) > 0) {
-            throw new LogicException('empty properties with required: ' . implode(', ', $errors));
+            throw new LogicException('Empty required properties: ' . implode(', ', $errors));
         }
-        $parameters[] = 'sig=' . $this->getSig($config->getKey1());
+        $parameters['sig'] = $this->getSig($config->getKey1());
 
-        return implode('&', $parameters);
+        return $parameters;
     }
 
 }

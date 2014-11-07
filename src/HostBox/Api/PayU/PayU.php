@@ -6,6 +6,7 @@ use HostBox\Api\PayU\Exceptions\LogicException;
 use HostBox\Api\PayU\Exceptions\ResponseException;
 use HostBox\Api\PayU\Exceptions\RuntimeException;
 use HostBox\Api\PayU\Requests\IRequest;
+use HostBox\Api\PayU\Requests\NewPaymentRequest;
 use HostBox\Api\PayU\Requests\PaymentCancelRequest;
 use HostBox\Api\PayU\Requests\PaymentConfirmRequest;
 use HostBox\Api\PayU\Requests\PaymentInfoRequest;
@@ -79,9 +80,28 @@ class PayU {
 
     /**
      * @param IRequest $request
+     * @return void
+     */
+    public function prepareEntityForRequest(IRequest &$request) {
+        if ($request instanceof NewPaymentRequest && $request->getPosAuthKey() === NULL && $request->getPosId() === NULL) {
+            $request->setPosAuthKey($this->getConfig()->getPosAuthKey());
+            $request->setPosId($this->getConfig()->getPosId());
+        }
+    }
+
+    public function getRequestSig(IRequest $request) {
+        return $request->getSig($this->getConfig()->getKey1());
+    }
+
+    /**
+     * @param IRequest $request
+     * @throws RuntimeException
+     * @throws LogicException
+     * @throws ResponseException
      * @return mixed
      */
     private function createResponseEntity(IRequest $request) {
+        $this->prepareEntityForRequest($request);
         $response = $this->connection->request($request);
         switch ($this->connection->getConfig()->getFormat()) {
             case Config::FORMAT_XML:

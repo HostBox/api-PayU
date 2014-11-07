@@ -32,7 +32,7 @@ class Config implements IConfig {
      * @param string $encoding
      * @param string $format
      */
-    public function __construct($posId, $posAuthKey, $key1, $key2, $encoding = self::ENCODING_UTF_8, $format = self::FORMAT_XML) {
+    public function __construct($posId, $posAuthKey, $key1, $key2, $encoding = IConfig::ENCODING_UTF_8, $format = IConfig::FORMAT_XML) {
         $this->posId = $posId;
         $this->posAuthKey = $posAuthKey;
         $this->key1 = $key1;
