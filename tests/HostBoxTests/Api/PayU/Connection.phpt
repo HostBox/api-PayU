@@ -23,9 +23,14 @@ class ConnectionTest extends Tester\TestCase {
         $connection = new Connection(
             new Config(12345, 'ab', 'cd', 'ef', Config::ENCODING_ISO_8859_2, Config::FORMAT_TXT)
         );
-
         Tester\Assert::same(
             Connection::PAYU_URL . '/ISO/Payment/cancel/txt',
+            $connection->getUrl(new PaymentCancelRequest())
+        );
+
+        $connection = new Connection(new Config(12345, 'ab', 'cd', 'ef', 'uTf', 'xML'));
+        Tester\Assert::same(
+            Connection::PAYU_URL . '/UTF/Payment/cancel/xml',
             $connection->getUrl(new PaymentCancelRequest())
         );
     }
@@ -37,7 +42,9 @@ class ConnectionTest extends Tester\TestCase {
             );
             $connection->getUrl(new PaymentInfoRequest());
         }, '\HostBox\Api\PayU\Exceptions\LogicException');
+    }
 
+    public function testCheckFormat() {
         Tester\Assert::exception(function () {
             $connection = new Connection(
                 new Config(12345, 'ab', 'cd', 'ef', Config::ENCODING_UTF_8, 'json')

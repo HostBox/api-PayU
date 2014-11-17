@@ -63,12 +63,12 @@ class Config implements IConfig {
 
     /** @inheritdoc */
     public function getEncoding() {
-        return $this->encoding;
+        return strtoupper($this->encoding);
     }
 
     /** @inheritdoc */
     public function getFormat() {
-        return $this->format;
+        return strtolower($this->format);
     }
 
 }
