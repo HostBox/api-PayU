@@ -3,6 +3,7 @@
 namespace HostBox\Api\PayU;
 
 use HostBox\Api\PayU\Exceptions\LogicException;
+use HostBox\Api\PayU\Exceptions\NotImplementedException;
 use HostBox\Api\PayU\Exceptions\ResponseException;
 use HostBox\Api\PayU\Exceptions\RuntimeException;
 use HostBox\Api\PayU\Requests\IRequest;
@@ -90,12 +91,17 @@ class PayU {
         }
     }
 
+    /**
+     * @param IRequest $request
+     * @return string
+     */
     public function getRequestSig(IRequest $request) {
         return $request->getSig($this->getConfig()->getKey1());
     }
 
     /**
      * @param IRequest $request
+     * @throws NotImplementedException
      * @throws RuntimeException
      * @throws LogicException
      * @throws ResponseException
@@ -130,6 +136,7 @@ class PayU {
                 }
             }
             case Config::FORMAT_TXT:
+                throw new NotImplementedException('Not implemented response format');
             default:
                 throw new LogicException('Not supported response format');
         }
