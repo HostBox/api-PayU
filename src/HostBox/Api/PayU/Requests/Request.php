@@ -21,6 +21,13 @@ use Nette\Utils\ArrayHash;
  */
 abstract class Request implements IRequest {
 
+    const
+        NEW_PAYMENT = 'NewPayment',
+        GET_PAYMENT = 'Payment/get',
+        CONFIRM_PAYMENT = 'Payment/confirm',
+        CANCEL_PAYMENT = 'Payment/cancel';
+
+
     /** @var int @required */
     protected $posId;
 

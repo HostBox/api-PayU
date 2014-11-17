@@ -2,8 +2,6 @@
 
 namespace HostBox\Api\PayU\Requests;
 
-use HostBox\Api\PayU\Connection;
-
 
 /**
  * @method string getPayType
@@ -131,7 +129,7 @@ class NewPaymentRequest extends Request {
 
     /** @inheritdoc */
     public function getType() {
-        return Connection::REQUEST_NEW_PAYMENT;
+        return Request::NEW_PAYMENT;
     }
 
     /** @inheritdoc */

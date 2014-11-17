@@ -2,14 +2,12 @@
 
 namespace HostBox\Api\PayU\Requests;
 
-use HostBox\Api\PayU\Connection;
-
 
 class PaymentInfoRequest extends Request {
 
     /** @inheritdoc */
     public function getType() {
-        return Connection::REQUEST_GET_PAYMENT;
+        return Request::GET_PAYMENT;
     }
 
     /** @inheritdoc */

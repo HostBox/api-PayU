@@ -10,6 +10,7 @@ use HostBox\Api\PayU\Requests\NewPaymentRequest;
 use HostBox\Api\PayU\Requests\PaymentCancelRequest;
 use HostBox\Api\PayU\Requests\PaymentConfirmRequest;
 use HostBox\Api\PayU\Requests\PaymentInfoRequest;
+use HostBox\Api\PayU\Requests\Request;
 use HostBox\Api\PayU\Responses\IResponse;
 use HostBox\Api\PayU\Responses\PaymentActionResponse;
 use HostBox\Api\PayU\Responses\PaymentInfoResponse;
@@ -115,12 +116,12 @@ class PayU {
                     throw new ResponseException((string) $xml->error->message, (int) $xml->error->nr);
                 } else if ($status == 'OK') {
                     switch ($request->getType()) {
-                        case Connection::REQUEST_GET_PAYMENT:
+                        case Request::GET_PAYMENT:
                             return new PaymentInfoResponse((array) $xml->trans);
-                        case Connection::REQUEST_CONFIRM_PAYMENT:
-                        case Connection::REQUEST_CANCEL_PAYMENT:
+                        case Request::CONFIRM_PAYMENT:
+                        case Request::CANCEL_PAYMENT:
                             return new PaymentActionResponse((array) $xml->trans);
-                        case Connection::REQUEST_NEW_PAYMENT:
+                        case Request::NEW_PAYMENT:
                         default:
                             throw new LogicException('Not supported request type for response');
                     }

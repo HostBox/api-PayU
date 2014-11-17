@@ -4,17 +4,12 @@ namespace HostBox\Api\PayU;
 
 use HostBox\Api\PayU\Exceptions\LogicException;
 use HostBox\Api\PayU\Requests\IRequest;
+use HostBox\Api\PayU\Requests\Request;
 
 
 class Connection {
 
     const PAYU_URL = 'https://secure.payu.com/paygw';
-
-    const
-        REQUEST_NEW_PAYMENT = 'NewPayment',
-        REQUEST_GET_PAYMENT = 'Payment/get',
-        REQUEST_CONFIRM_PAYMENT = 'Payment/confirm',
-        REQUEST_CANCEL_PAYMENT = 'Payment/cancel';
 
     /** @var Config */
     protected $config;
@@ -68,10 +63,10 @@ class Connection {
      */
     private function checkAndGetRequestType(IRequest $request) {
         switch ($request->getType()) {
-            case self::REQUEST_NEW_PAYMENT:
-            case self::REQUEST_GET_PAYMENT:
-            case self::REQUEST_CONFIRM_PAYMENT:
-            case self::REQUEST_CANCEL_PAYMENT:
+            case Request::NEW_PAYMENT:
+            case Request::GET_PAYMENT:
+            case Request::CONFIRM_PAYMENT:
+            case Request::CANCEL_PAYMENT:
                 return $request->getType();
             default:
                 throw new LogicException('Not supported request type');
