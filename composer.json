@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=5.3.0",
-        "nette/reflection": "~2.2.0"
+        "nette/reflection": "~2.2"
     },
     "suggest": {
         "ext-curl": "*"
