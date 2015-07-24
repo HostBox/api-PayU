@@ -5,6 +5,7 @@ namespace HostBox\Api\PayU;
 use HostBox\Api\PayU\Exceptions\LogicException;
 use HostBox\Api\PayU\Requests\IRequest;
 use HostBox\Api\PayU\Requests\Request;
+use Kdyby\CurlCaBundle\CertificateHelper;
 
 
 class Connection {
@@ -31,7 +32,7 @@ class Connection {
     public function request(IRequest $request) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->getUrl($request));
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_CAINFO, CertificateHelper::getCaInfoFile());
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_setopt($ch, CURLOPT_POST, 1);
