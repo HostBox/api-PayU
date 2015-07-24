@@ -64,7 +64,7 @@ class PayU
 
 	/**
 	 * @param PaymentCancelRequest $request
-	 * @return PaymentInfoResponse
+	 * @return PaymentActionResponse
 	 */
 	public function cancelPayment(PaymentCancelRequest $request)
 	{
@@ -73,7 +73,7 @@ class PayU
 
 	/**
 	 * @param PaymentConfirmRequest $request
-	 * @return PaymentInfoResponse
+	 * @return PaymentActionResponse
 	 */
 	public function confirmPayment(PaymentConfirmRequest $request)
 	{
@@ -116,7 +116,7 @@ class PayU
 	 * @throws RuntimeException
 	 * @throws LogicException
 	 * @throws ResponseException
-	 * @return mixed
+	 * @return PaymentInfoResponse|PaymentActionResponse
 	 */
 	private function createResponseEntity(IRequest $request)
 	{
