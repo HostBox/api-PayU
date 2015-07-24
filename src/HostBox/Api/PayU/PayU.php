@@ -20,6 +20,23 @@ use HostBox\Api\PayU\Responses\PaymentInfoResponse;
 class PayU
 {
 
+	const
+		PAYMENT_TYPE_CS = 'cs',
+		PAYMENT_TYPE_MBANK = 'mp',
+		PAYMENT_TYPE_KB = 'kb',
+		PAYMENT_TYPE_RF = 'rf',
+		PAYMENT_TYPE_GE = 'pg',
+		PAYMENT_TYPE_SBERBANK = 'pv',
+		PAYMENT_TYPE_FIO = 'pf',
+		PAYMENT_TYPE_ERA = 'era',
+		PAYMENT_TYPE_CSOB = 'cb',
+		PAYMENT_TYPE_PAYSEC = 'psc',
+		PAYMENT_TYPE_CARD = 'c',
+		PAYMENT_TYPE_MOBITO = 'mo',
+		PAYMENT_TYPE_BANK_TRANSFER = 'bt',
+		PAYMENT_TYPE_POST_TRANSFER = 'pt',
+		PAYMENT_TYPE_TEST = 't';
+
 	/** @var Connection */
 	private $connection;
 
