@@ -3,11 +3,13 @@
 namespace HostBox\Api\PayU\Requests;
 
 
-class PaymentConfirmRequest extends PaymentInfoRequest {
+class PaymentConfirmRequest extends PaymentInfoRequest
+{
 
-    /** @inheritdoc */
-    public function getType() {
-        return Request::CONFIRM_PAYMENT;
-    }
+	/** @inheritdoc */
+	public function getType()
+	{
+		return Request::CONFIRM_PAYMENT;
+	}
 
 }

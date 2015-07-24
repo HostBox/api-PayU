@@ -1,28 +1,26 @@
 {
-    "name": "hostbox/api-payu",
-    "description": "Enjoyable Api for PayU",
-    "keywords": ["api", "PayU", "payment", "hostbox"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Pavel Macháň",
-            "email": "machan@hostbox.cz"
-        }
-    ],
-    "autoload": {
-        "psr-0": {
-            "HostBox\\Api\\": "src/"
-        }
-    },
-    "require": {
-        "php": ">=5.3.0",
-        "nette/reflection": "~2.2",
-        "kdyby/curl-ca-bundle": "~1.0"
-    },
-    "suggest": {
-        "ext-curl": "*"
-    },
-    "require-dev": {
-        "nette/tester": "~1.0"
-    }
+	"name": "hostbox/api-payu",
+	"description": "Enjoyable Api for PayU",
+	"keywords": ["api", "PayU", "payment", "hostbox"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Pavel Macháň",
+			"email": "machan@hostbox.cz"
+		}
+	],
+	"autoload": {
+		"psr-0": {
+			"HostBox\\Api\\": "src/"
+		}
+	},
+	"require": {
+		"php": ">=5.3.0",
+		"ext-curl": "*",
+		"nette/reflection": "~2.2",
+		"kdyby/curl-ca-bundle": "~1.0"
+	},
+	"require-dev": {
+		"nette/tester": "~1.0"
+	}
 }

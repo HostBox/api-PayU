@@ -3,24 +3,25 @@
 namespace HostBox\Api\PayU\Responses;
 
 
-interface IResponse {
+interface IResponse
+{
 
-    /** @return string */
-    public function getPosId();
+	/** @return string */
+	public function getPosId();
 
-    /** @return string */
-    public function getSig();
+	/** @return string */
+	public function getSig();
 
-    /** @return string */
-    public function getTs();
+	/** @return string */
+	public function getTs();
 
-    /** @return string */
-    public function getSessionId();
+	/** @return string */
+	public function getSessionId();
 
-    /**
-     * @param string $key2
-     * @return bool
-     */
-    public function isSigValid($key2);
+	/**
+	 * @param string $key2
+	 * @return bool
+	 */
+	public function isSigValid($key2);
 
 }

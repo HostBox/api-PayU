@@ -3,5 +3,6 @@
 namespace HostBox\Api\PayU\Exceptions;
 
 
-class RuntimeException extends \RuntimeException {
+class RuntimeException extends \RuntimeException
+{
 }

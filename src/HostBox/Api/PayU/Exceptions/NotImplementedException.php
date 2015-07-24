@@ -3,5 +3,6 @@
 namespace HostBox\Api\PayU\Exceptions;
 
 
-class NotImplementedException extends \LogicException {
+class NotImplementedException extends \LogicException
+{
 }

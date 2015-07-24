@@ -3,5 +3,6 @@
 namespace HostBox\Api\PayU\Exceptions;
 
 
-class ResponseException extends \LogicException {
+class ResponseException extends \LogicException
+{
 }
