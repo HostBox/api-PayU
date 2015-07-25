@@ -79,14 +79,14 @@ class RequestTest extends Tester\TestCase
 	public function testGetParameters()
 	{
 		Tester\Assert::same(
-			'pos_auth_key=abcdefg&amount=10000&desc=TEST&first_name=Name&last_name=Surname&email=test@test.test&language=cs&client_ip=127.0.0.1&pos_id=1234&session_id=123&ts=123456789&sig=eabc4e2e2825c51743b3ed673db6fb99',
+			'pos_auth_key=abcdefg&amount=10000&desc=TEST&first_name=Name&last_name=Surname&email=test%40test.test&language=cs&client_ip=127.0.0.1&pos_id=1234&session_id=123&ts=123456789&sig=eabc4e2e2825c51743b3ed673db6fb99',
 			$this->newPaymentRequest->getConnectionParameters($this->config)
 		);
 
 		$this->newPaymentRequest->setAmount(9999);
 		$this->newPaymentRequest->setDesc2('lorem');
 		Tester\Assert::same(
-			'pos_auth_key=abcdefg&amount=9999&desc=TEST&desc2=lorem&first_name=Name&last_name=Surname&email=test@test.test&language=cs&client_ip=127.0.0.1&pos_id=1234&session_id=123&ts=123456789&sig=9d72e0f7010db0f911131d2a86eb48e0',
+			'pos_auth_key=abcdefg&amount=9999&desc=TEST&desc2=lorem&first_name=Name&last_name=Surname&email=test%40test.test&language=cs&client_ip=127.0.0.1&pos_id=1234&session_id=123&ts=123456789&sig=9d72e0f7010db0f911131d2a86eb48e0',
 			$this->newPaymentRequest->getConnectionParameters($this->config)
 		);
 
