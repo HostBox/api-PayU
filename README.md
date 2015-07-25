@@ -1,4 +1,4 @@
-(Experimental!) Enjoyable Api for PayU [![Build Status](https://travis-ci.org/HostBox/api-PayU.png?branch=master)](https://travis-ci.org/HostBox/api-PayU)
+Enjoyable Api for PayU [![Build Status](https://travis-ci.org/HostBox/api-PayU.png?branch=master)](https://travis-ci.org/HostBox/api-PayU)
 ===================
 
 Package Installation
