@@ -8,13 +8,11 @@ use HostBox\Api\PayU\Requests\Request;
 use Kdyby\CurlCaBundle\CertificateHelper;
 
 
-class Connection
+class Connection implements IConnection
 {
 
-	const PAYU_URL = 'https://secure.payu.com/paygw';
-
 	/** @var Config */
-	protected $config;
+	private $config;
 
 
 	public function __construct(Config $config)
@@ -22,16 +20,13 @@ class Connection
 		$this->config = $config;
 	}
 
-	/** @return Config */
+	/** @inheritdoc */
 	public function getConfig()
 	{
 		return $this->config;
 	}
 
-	/**
-	 * @param IRequest $request
-	 * @return string
-	 */
+	/** @inheritdoc */
 	public function request(IRequest $request)
 	{
 		$ch = curl_init();
@@ -48,10 +43,7 @@ class Connection
 		return $response;
 	}
 
-	/**
-	 * @param IRequest $request
-	 * @return string
-	 */
+	/** @inheritdoc */
 	public function getUrl(IRequest $request)
 	{
 		return implode('/', array(
@@ -87,9 +79,9 @@ class Connection
 	private function checkAndGetEncoding()
 	{
 		switch ($this->config->getEncoding()) {
-			case IConfig::ENCODING_ISO_8859_2:
-			case IConfig::ENCODING_UTF_8:
-			case IConfig::ENCODING_WINDOWS_1250:
+			case Config::ENCODING_ISO_8859_2:
+			case Config::ENCODING_UTF_8:
+			case Config::ENCODING_WINDOWS_1250:
 				return $this->config->getEncoding();
 			default:
 				throw new LogicException('Not supported character encoding');
@@ -103,8 +95,8 @@ class Connection
 	private function checkAndGetResponseFormat()
 	{
 		switch ($this->config->getFormat()) {
-			case IConfig::FORMAT_TXT:
-			case IConfig::FORMAT_XML:
+			case Config::FORMAT_TXT:
+			case Config::FORMAT_XML:
 				return $this->config->getFormat();
 			default:
 				throw new LogicException('Not supported response format');

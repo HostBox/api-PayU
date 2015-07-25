@@ -2,17 +2,17 @@
 
 namespace HostBox\Api\PayU\Requests;
 
-use HostBox\Api\PayU\IConfig;
+use HostBox\Api\PayU\Config;
 
 
 interface IRequest
 {
 
 	/**
-	 * @param IConfig $config
+	 * @param Config $config
 	 * @return string
 	 */
-	public function getConnectionParameters(IConfig $config);
+	public function getConnectionParameters(Config $config);
 
 	/** @return string */
 	public function getType();
