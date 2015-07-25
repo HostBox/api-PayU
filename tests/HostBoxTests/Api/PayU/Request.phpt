@@ -3,7 +3,6 @@
 namespace HostBoxTests\Api\PayU;
 
 use HostBox\Api\PayU\Config;
-use HostBox\Api\PayU\IConfig;
 use HostBox\Api\PayU\Requests\NewPaymentRequest;
 use HostBox\Api\PayU\Requests\PaymentCancelRequest;
 use HostBox\Api\PayU\Requests\PaymentConfirmRequest;
@@ -19,7 +18,7 @@ class RequestTest extends Tester\TestCase
 	/** @var NewPaymentRequest */
 	private $newPaymentRequest;
 
-	/** @var IConfig */
+	/** @var Config */
 	private $config;
 
 
