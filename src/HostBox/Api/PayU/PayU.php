@@ -21,21 +21,21 @@ class PayU
 {
 
 	const
-		PAYMENT_TYPE_CS = 'cs',
-		PAYMENT_TYPE_MBANK = 'mp',
-		PAYMENT_TYPE_KB = 'kb',
-		PAYMENT_TYPE_RF = 'rf',
-		PAYMENT_TYPE_GE = 'pg',
-		PAYMENT_TYPE_SBERBANK = 'pv',
-		PAYMENT_TYPE_FIO = 'pf',
-		PAYMENT_TYPE_ERA = 'era',
-		PAYMENT_TYPE_CSOB = 'cb',
-		PAYMENT_TYPE_PAYSEC = 'psc',
-		PAYMENT_TYPE_CARD = 'c',
-		PAYMENT_TYPE_MOBITO = 'mo',
-		PAYMENT_TYPE_BANK_TRANSFER = 'bt',
-		PAYMENT_TYPE_POST_TRANSFER = 'pt',
-		PAYMENT_TYPE_TEST = 't';
+		CHANNEL_CS = 'cs',
+		CHANNEL_MBANK = 'mp',
+		CHANNEL_KB = 'kb',
+		CHANNEL_RF = 'rf',
+		CHANNEL_GE = 'pg',
+		CHANNEL_SBERBANK = 'pv',
+		CHANNEL_FIO = 'pf',
+		CHANNEL_ERA = 'era',
+		CHANNEL_CSOB = 'cb',
+		CHANNEL_PAYSEC = 'psc',
+		CHANNEL_CARD = 'c',
+		CHANNEL_MOBITO = 'mo',
+		CHANNEL_BANK_TRANSFER = 'bt',
+		CHANNEL_POST_TRANSFER = 'pt',
+		CHANNEL_TEST = 't';
 
 	/** @var Connection */
 	private $connection;
